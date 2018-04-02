@@ -1,0 +1,37 @@
+ 1775  rm shell_clase_3_ejer
+ 1776  echo "shell_clase_3_ejer_1-1"
+ 1777  head -1 optd_aircraft.csv| tr "^" "\n" | wc
+ 1778  cut -d "^" -f1-8 --output-delimiter "," optd_aircraft.csv| less
+ 1829  echo "shell_clase_3_ejer_1-2"
+ 1830  head optd_por_public.csv| tr 'x' '\n'| tr ' ' '\n' |wc -l
+ 1834  echo "shell_clase_3_ejer_1-3"
+ 1835  head -1 optd_por_public.csv | tr '^' '\n'| wc -l
+ 1879  echo "shell_clase_3_ejer_1-5"
+ 1880  head -10 optd_airlines.csv | sort -t "^" -k 14 -r -n | cut -d '^' -f 8,14
+ 1879  echo "shell_clase_3_ejer_1-5"
+ 1880  head -10 optd_airlines.csv | sort -t "^" -k 14 -r -n | cut -d '^' -f 8,14
+ 1990  echo "shell_clase_3_ejer_2-2"
+ 1991  cut -d "^" -f 8 optd_airlines.csv | grep "aero[^c]"
+ 2009  echo "shell_clase_3_ejer_2-3"
+ 2010  head -1 optd_por_public.csv| tr "^" "\n" | grep name | wc -l
+ 2133  echo "shell_clase_3_ejer_2-4"
+ 2134  grep -Rinw science /dsc/*.txt
+ 2135  cd Data
+ 2136  ll
+ 2137  cd opentraveldata
+ 2138  ll
+ 2166  echo "shell_clase_3_ejer_3-1"
+ 2167  cat Text_example.txt
+ 2168  cat Text_example.txt| sed 's/line/\n/'
+ 2169  cd ..
+ 2170  cd opentraveldata
+ 2248  echo "ejer_Shell_CSVkit"
+ 2249  cut -d "^" -f 2 optd_aircraft.csv| sort -u| csvstat -d '^'| less
+ 2253  csvstat -d '^' -c manufacturer optd_aircraft.csv| less
+ 2256  echo "ejer_Shell_CSVkit_2"
+ 2257  cut -d "^" -f 2 optd_aircraft.csv| sort -u| wc -l
+ 2259  cut -d "^" -f 2 optd_aircraft.csv| sort -u| tail -n+2| wc -l
+ 2271  echo "ejer_Shell_CSVkit_3"
+ 2272  csvcut -d '^' -c 2 optd_aircraft.csv| uniq -c| sort -nr| head -5
+ 2285  echo "ejer_Shell_CSVkit_4"
+ 2286  csvgrep -d '^' -c manufacturer -m Airbus optd_aircraft.csv| tr "," "|" > Airbus.txt
