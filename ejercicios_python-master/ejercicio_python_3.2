@@ -1,0 +1,17 @@
+  14:
+EJERCICIO_3.2Write a function that will take text file and pattern as input parameters, and return the number of
+occurances of case insensitive pattern inside a text (similar to: grep -i –o pattern file | wc -l)
+  15: %cd ..
+  64:
+def number_occurances (file_direction,text_to_find):
+    file=open(file_direction)
+    file_read=file.read()
+    if text_to_find.isupper():
+        file_upper_lower=file_read.upper()
+        return file_upper_lower.count(text_to_find)
+    else:
+        file_upper_lower=file_read.lower()
+        return file_upper_lower.count(text_to_find)
+    file_upper_lower.close()
+  65: number_occurances('/home/dsc/Data/shell/Finn.txt','a')
+  66: number_occurances('/home/dsc/Data/shell/Finn.txt','A')
