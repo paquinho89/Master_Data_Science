@@ -1,1 +1,146 @@
 
+#THE FOLLOWING CODE IS EXECUTED FROM THE SHELL OF LINUX
+1.Exercise: Get the plane with the highest number of engines from the opt_aircraft which is inside the opentraveldata data base:
+#We stablish connection with the data base:
+psql -d opentraveldata
+#We list all the tables which are inside the opentraveldata data base:
+\d
+#We get the plane with the highest number of engines from the table. Note that we need to ignore the NULL values:
+SELECT model, nb_engines FROM optd_aircraft
+WHERE nb_engines IS NOT NULL
+ORDER BY nb_engines desc LIMIT 1;
+
+1.1 Exercise: What number of engines is most common on airplanes?
+SELECT nb_engines, COUNT(nb_engines) FROM optd_aircraft GROUP BY nb_engines
+ORDER BY count DESC;
+
+2.Exercise: Create 'friends' DB if it does not exist.
+#The datbases are list:
+\l
+#The 'friends' database is created;
+CREATE DATABASE friends;
+
+3.Exercise: Generate 'facebook' table where every person is identified with the name, age,
+city of residence, and email. The table should at least have 10 rows.
+#We stablish connection with the 'friends' data base
+\c friends
+#The table is created, specifying the columns and the type of the data in the column:
+CREATE TABLE facebook
+(name VARCHAR, age INT, city_of_residence VARCHAR,
+email VARCHAR);
+#The facebook table is filled with values
+INSERT INTO facebook VALUES
+('Ramon', 52, 'Ourense', 'ramon@hotmail.es'),
+('Josefa', 23, 'Soutochao', 'josefa@yahoo.com'),
+('Brasinda', 12, 'A Coruña', 'brasinda@todoloquepuedas.com'),
+('Francisco', 34, 'Correchouso', 'gonzalez@gmaail.es'),
+('Ramiro', 14, 'Verin', 'canhaveral@obrsyservicios.gal'),
+('Diego', 27, 'Laza', 'diego@hotmail.com'),
+('Eulalia', 41, 'Toro', 'eulalia@toro.com'),
+('Ze', 49, 'Soutocobo', 'ze@abellas.com'),
+('Romero', 42, 'A estrada', 'romero@loveyou.com'),
+('Brais', 39, 'Touriñán','brais@tete.gal');
+
+4.Exercise: Write a query to obtain Facebook friends which are younger than <18 or older
+than 65 years.
+SELECT name, age FROM facebook
+WHERE age <18;
+
+5.Exercise: Write a query to obtain all the facebook friends which do not reside in Soutochao.
+SELECT name, city_of_residence FROM facebook
+WHERE city_of_residence != 'Soutochao';
+
+6.Exercise: Add phone and username columns to your Facebook table.
+ALTER TABLE facebook ADD COLUMN phone INT;
+ALTER TABLE facebook ADD COLUMN username VARCHAR;
+
+7.Exercise: Fill the phone and username columns with just one value
+INSERT INTO facebook (username, phone)
+VALUES('paquinh89', 65895);
+
+8.Exercise: Delete the previous added values
+#Removing user values
+UPDATE facebook
+SET username= NULL
+#Remving phone values
+UPDATE facebook
+SET phone= NULL
+
+9.Exercise: Fill the phone and username columns with values
+UPDATE facebook
+SET username='fran', phone=4561 WHERE name='Paquinho';
+UPDATE facebook
+SET username='George', phone=45618 WHERE name='Jorge';
+UPDATE facebook
+SET username='tonto', phone=7895 WHERE name='Pepe';
+UPDATE facebook
+SET username='morrion', phone=1238 WHERE name='Juan';
+UPDATE facebook
+SET username='caseiro', phone=8852 WHERE name='Ramon';
+UPDATE facebook
+SET username='pepa', phone=93047 WHERE name='Josefa';
+UPDATE facebook
+SET username='blasa', phone=025741 WHERE name='Brasinda';
+UPDATE facebook
+SET username='paco', phone=48713 WHERE name='Francisco';
+UPDATE facebook
+SET username='ram', phone=217965 WHERE name='Ramiro';
+UPDATE facebook
+SET username='bng', phone=78952 WHERE name='Diego';
+UPDATE facebook
+SET username='jose', phone=0351 WHERE name='Ze';
+UPDATE facebook
+SET username='romi', phone=4561 WHERE name='Romero';
+UPDATE facebook
+SET username='almeria', phone=741 WHERE name='Brais';
+
+10 Exercise. Sort the values by their age from highst to lowest
+SELECT * FROM facebook ORDER BY age DESC;
+
+11 Exercise. Sort the values by their age and name from highst to lowest
+SELECT * FROM  facebook ORDER BY name, age DESC;
+
+12 Exercise. Select people with age between 20 and 30 year and sort the values showing just the 3 highest.
+SELECT * FROM facebook WHERE age BETWEEN 20 AND 30
+ORDER BY age DESC
+LIMIT 2;
+
+13 Exercise. Modify the my_fb_friends table changing the name dani by Daniel:
+SELECT * FROM my_fb_friends;
+UPDATE my_fb_friends
+SET name='Daniel' WHERE name='Dani';
+
+JOINS
+I am consider the linkedin table, the table from the left and the my_fb_friends table, the table from the right.
+14 Exercise. Perform an inner join.
+SELECT contact FROM linkedin
+INNER JOIN my_fb_friends ON contact=name;
+#In case the name of the column is the same on both tables, we can do:
+SELECT contact FROM linkedin AS lk
+INNER JOIN my_fb_friends AS fb ON lk.contact=fb.name;
+
+15 Exercise. Perform a left join.
+SELECT * FROM linkedin
+LEFT JOIN my_fb_friends ON contact=name
+
+16 Exercise. Perform a right join.
+SELECT * FROM linkedin
+RIGHT JOIN my_fb_friends ON contact=name
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
